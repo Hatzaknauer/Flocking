@@ -17,22 +17,24 @@ public class FlockManager : MonoBehaviour
 
     void Start()
     {
+        //Aloca peixes num game object
         allFish = new GameObject[numFish];
+
+        //Enquanto não estiver no limite de peixes
         for (int i =0; i < numFish; i++)
         {
+            //Define até onde os peixes podem ser instanciados
             Vector3 pos = this.transform.position +
                 new Vector3(
                 Random.Range(-swinLimits.x, swinLimits.x),
                 Random.Range(-swinLimits.y, swinLimits.y),
                 Random.Range(-swinLimits.z, swinLimits.z));
+            //Instancia novos peixes
             allFish[i] = (GameObject)Instantiate(fishPrefab, pos, Quaternion.identity);
+
+            //Adiciona à todos os peixes esse objeto como o manager
             allFish[i].GetComponent<Flock>().myManager = this;
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
 }

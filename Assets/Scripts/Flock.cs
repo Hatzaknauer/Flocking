@@ -9,13 +9,14 @@ public class Flock : MonoBehaviour
 
     void Start()
     {
+        //Inicia cada peixe com uma velocidade aleatória
         speed = Random.Range(myManager.minSpeed,
             myManager.maxSpeed);    
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, 0, Time.deltaTime * speed);
+        //Move o peixe
+        transform.Translate(0, 0, Time.deltaTime * speed); 
     }
 }
