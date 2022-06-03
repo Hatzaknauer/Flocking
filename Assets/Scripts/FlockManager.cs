@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class FlockManager : MonoBehaviour
 {
-    public GameObject fishPrefab;
+    public GameObject[] fishPrefab;
     public int numFish = 20;
     public GameObject[] allFish;
     public Vector3 swinLimits = new Vector3(5, 5, 5);
 
     [Header("Configurações do Cardume")]
-    [Range(0.0f, 5.0f)]
+    [Range(0.0f, 10.0f)]
     public float minSpeed;
-    [Range(0.0f, 5.0f)]
+    [Range(0.0f, 20.0f)]
     public float maxSpeed;
     [Range(1.0f, 10f)]
     public float neighbourDistance;
@@ -33,8 +33,9 @@ public class FlockManager : MonoBehaviour
                 Random.Range(-swinLimits.x, swinLimits.x),
                 Random.Range(-swinLimits.y, swinLimits.y),
                 Random.Range(-swinLimits.z, swinLimits.z));
+
             //Instancia novos peixes
-            allFish[i] = (GameObject)Instantiate(fishPrefab, pos, Quaternion.identity);
+            allFish[i] = (GameObject)Instantiate(fishPrefab[(Random.Range(0, 2))], pos, Quaternion.identity);
 
             //Adiciona à todos os peixes esse objeto como o manager
             allFish[i].GetComponent<Flock>().myManager = this;
