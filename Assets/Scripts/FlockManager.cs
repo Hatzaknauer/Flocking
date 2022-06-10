@@ -41,14 +41,19 @@ public class FlockManager : MonoBehaviour
             //Adiciona à todos os peixes esse objeto como o manager
             allFish[i].GetComponent<Flock>().myManager = this;
         }
+        //Define a posição destino como a própria posição
         goalPos = this.transform.position;
     }
 
     void Update()
     {
+        //Define a posição destino como a própria posição
         goalPos = this.transform.position;
+
+        //Roda um número aleatório pra decidir se vai mudar a posição destino
         if (Random.Range(0, 100) < 10)
         {
+            //Define a posição de destino com valores aleatórios
             goalPos = this.transform.position + new Vector3(Random.Range(-swinLimits.x, swinLimits.x),
                                                             Random.Range(-swinLimits.y, swinLimits.y),
                                                             Random.Range(-swinLimits.z, swinLimits.z));

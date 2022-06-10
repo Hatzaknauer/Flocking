@@ -17,39 +17,58 @@ public class Flock : MonoBehaviour
 
     void Update()
     {
-        /*Chama método para que as regras sejam sempre atualizadas
-        ApplyRules();
-        //Move o peixe
-        transform.Translate(0, 0, Time.deltaTime * speed);*/
+        //Define o terreno limite do agente
         Bounds b = new Bounds(myManager.transform.position, myManager.swinLimits * 2);
+
+        //Declara raycast
         RaycastHit hit = new RaycastHit();
+
+        //Recebe a direção a ser movida com base na posição do obstáculo subtraindo a posição do agente
         Vector3 direction = myManager.transform.position - transform.position;
+
+        //Caso o ponto esteja fora dos limites
         if (!b.Contains(transform.position))
         {
+            //Atualiza a variável booleana fazendo curva para verdadeiro
             turning = true;
+            //Atualiza a direção do vetor de direção para voltar para os limites
             direction = myManager.transform.position - transform.position;
         }
+        //Caso o Raycast colida
         else if (Physics.Raycast(transform.position, this.transform.forward * 50, out hit))
         {
+            //Atualiza a variável booleana fazendo curva para verdadeiro
             turning = true;
+            //Atualiza a direção do vetor de direção para a direção refletida do vetor
             direction = Vector3.Reflect(this.transform.forward, hit.normal);
         }
-        else
+        else 
+        { 
+            //Não está virando
             turning = false;
+        }
+
+        //Caso esteja virando
         if (turning)
         {
+            //Move o agente com o comando que faz curva
             transform.rotation = Quaternion.Slerp(transform.rotation,
-            Quaternion.LookRotation(direction),
-            myManager.rotationSpeed * Time.deltaTime);
+                                Quaternion.LookRotation(direction),
+                                myManager.rotationSpeed * Time.deltaTime);
         }
         else
         {
+            //Caso o número gerado seja menor que 10
             if (Random.Range(0, 100) < 10)
+                //Define nova velocidade aleatória
                 speed = Random.Range(myManager.minSpeed,
-                myManager.maxSpeed);
+                                    myManager.maxSpeed);
+            //Caso seja um número menor que 20
             if (Random.Range(0, 100) < 20)
+                //Chama método para aplicar regras
                 ApplyRules();
         }
+        //Define o eixo z para ser movido com base na velocidade
         transform.Translate(0, 0, Time.deltaTime * speed);
     }
 
@@ -120,8 +139,8 @@ public class Flock : MonoBehaviour
             {
                 //Move o peixe
                 transform.rotation = Quaternion.Slerp(transform.rotation,
-                    Quaternion.LookRotation(direction),
-                    myManager.rotationSpeed * Time.deltaTime);
+                                    Quaternion.LookRotation(direction),
+                                    myManager.rotationSpeed * Time.deltaTime);
             }
         }
     }
