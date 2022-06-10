@@ -3,4 +3,4 @@
  
  Movimentação em conjunto, desviando de obstáculos e se mantendo dentro dos limites(bounds) através de raycast.
  
- ![Bounds](/assets/Fish_bounds.png)
+ ![Bounds](/assets/images/Fish_bounds.png)
