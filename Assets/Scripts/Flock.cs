@@ -6,6 +6,7 @@ public class Flock : MonoBehaviour
 {
     public FlockManager myManager;
     float speed;
+    bool turning = false;
 
     void Start()
     {
@@ -16,11 +17,42 @@ public class Flock : MonoBehaviour
 
     void Update()
     {
-        //Chama método para que as regras sejam sempre atualizadas
+        /*Chama método para que as regras sejam sempre atualizadas
         ApplyRules();
         //Move o peixe
-        transform.Translate(0, 0, Time.deltaTime * speed); 
+        transform.Translate(0, 0, Time.deltaTime * speed);*/
+        Bounds b = new Bounds(myManager.transform.position, myManager.swinLimits * 2);
+        RaycastHit hit = new RaycastHit();
+        Vector3 direction = myManager.transform.position - transform.position;
+        if (!b.Contains(transform.position))
+        {
+            turning = true;
+            direction = myManager.transform.position - transform.position;
+        }
+        else if (Physics.Raycast(transform.position, this.transform.forward * 50, out hit))
+        {
+            turning = true;
+            direction = Vector3.Reflect(this.transform.forward, hit.normal);
+        }
+        else
+            turning = false;
+        if (turning)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation,
+            Quaternion.LookRotation(direction),
+            myManager.rotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            if (Random.Range(0, 100) < 10)
+                speed = Random.Range(myManager.minSpeed,
+                myManager.maxSpeed);
+            if (Random.Range(0, 100) < 20)
+                ApplyRules();
+        }
+        transform.Translate(0, 0, Time.deltaTime * speed);
     }
+
 
     void ApplyRules()
     {
@@ -77,7 +109,7 @@ public class Flock : MonoBehaviour
         if (groupSize > 0)
         {
             //Divide o centro do game object pela quantidade de game objects no array
-            vcentre = vcentre / groupSize;
+            vcentre = vcentre / groupSize + (myManager.goalPos - this.transform.position);
             //Divide a velocidade pela quantidade de game objects no array
             speed = gSpeed / groupSize;
 

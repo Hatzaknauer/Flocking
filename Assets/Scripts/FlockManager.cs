@@ -8,6 +8,7 @@ public class FlockManager : MonoBehaviour
     public int numFish = 20;
     public GameObject[] allFish;
     public Vector3 swinLimits = new Vector3(5, 5, 5);
+    public Vector3 goalPos;
 
     [Header("Configurações do Cardume")]
     [Range(0.0f, 10.0f)]
@@ -25,7 +26,7 @@ public class FlockManager : MonoBehaviour
         allFish = new GameObject[numFish];
 
         //Enquanto não estiver no limite de peixes
-        for (int i =0; i < numFish; i++)
+        for (int i = 0; i < numFish; i++)
         {
             //Define até onde os peixes podem ser instanciados
             Vector3 pos = this.transform.position +
@@ -40,6 +41,17 @@ public class FlockManager : MonoBehaviour
             //Adiciona à todos os peixes esse objeto como o manager
             allFish[i].GetComponent<Flock>().myManager = this;
         }
+        goalPos = this.transform.position;
     }
 
+    void Update()
+    {
+        goalPos = this.transform.position;
+        if (Random.Range(0, 100) < 10)
+        {
+            goalPos = this.transform.position + new Vector3(Random.Range(-swinLimits.x, swinLimits.x),
+                                                            Random.Range(-swinLimits.y, swinLimits.y),
+                                                            Random.Range(-swinLimits.z, swinLimits.z));
+        }
+    }
 }
