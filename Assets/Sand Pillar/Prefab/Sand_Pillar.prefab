@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 33000010529367134}
   - component: {fileID: 23000011916199912}
   - component: {fileID: 95000010017781358}
+  - component: {fileID: 1271566855}
+  - component: {fileID: 1271566856}
   m_Layer: 0
   m_Name: Sand_Pillar
   m_TagString: Untagged
@@ -26,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000013539010130}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.020724753, y: 0.020724753, z: 0.020724753}
+  m_LocalScale: {x: 0.60269904, y: 0.60269904, z: 0.60269904}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,3 +103,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &1271566855
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013539010130}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7, y: 29, z: 7}
+  m_Center: {x: -0.001562476, y: 13.95596, z: 0.0000010728835}
+--- !u!114 &1271566856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013539010130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc209128030b6f0409820b739ab4384c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishPrefab:
+  - {fileID: 1733855665772604, guid: b0489fdb6d64a4a4ba8e194e561d60cd, type: 3}
+  - {fileID: 1318662798089844, guid: 06a4036ceebb544e494c30d599b9d2c1, type: 3}
+  numFish: 200
+  allFish: []
+  swinLimits: {x: 5, y: 5, z: 5}
+  goalPos: {x: 40, y: 40, z: 40}
+  minSpeed: 3.65
+  maxSpeed: 4.2
+  neighbourDistance: 5.54
+  rotationSpeed: 2.82
